@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block title %}Records{% endblock %}
+
+{% block content %}
+<h1>All Records</h1>
+<p>
+    <a class="btn-custom" href="{{ url_for('main.create_record') }}">+ New Record</a>
+</p>
+
+{% if records %}
+    <ul style="list-style:none; padding:0;">
+        {% for record in records %}
+            <li class="record-card">
+                <strong>{{ record.title }}</strong>
+
+                {% if record.content %}
+                    <p>{{ record.content }}</p>
+                {% endif %}
+
+                <a class="btn-custom" href="{{ url_for('main.view_record', id=record.id) }}">View</a>
+                <a class="btn-custom" href="{{ url_for('main.edit_record', id=record.id) }}">Edit</a>
+
+                <form action="{{ url_for('main.delete_record', id=record.id) }}"
+                      method="POST"
+                      style="display:inline;">
+                    <button class="btn-custom"
+                            onclick="return confirm('Delete this record?');">
+                        Delete
+                    </button>
+                </form>
+            </li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>No records yet. Create your first one!</p>
+{% endif %}
+{% endblock %}

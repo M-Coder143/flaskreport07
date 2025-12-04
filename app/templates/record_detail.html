@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block title %}{{ record.title }}{% endblock %}
+
+{% block content %}
+
+<div class="record-card">
+
+    <h1 style="margin-bottom: 10px;">{{ record.title }}</h1>
+
+    <p style="color: #666; font-size: 14px;">
+        Created: {{ (record.created_at + timedelta(hours=8)).strftime('%B %d, %Y - %I:%M %p') }}
+    </p>
+
+    <hr style="margin: 20px 0;">
+
+    <div class="content">
+        <p style="font-size: 16px; line-height: 1.5;">
+            {{ record.content }}
+        </p>
+    </div>
+
+    <hr style="margin: 20px 0;">
+
+    <div style="margin-top: 15px;">
+        <a class="btn-custom" href="{{ url_for('main.list_records') }}" style="background:#777;">
+            Back to List
+        </a>
+    </div>
+
+</div>
+
+{% endblock %}
